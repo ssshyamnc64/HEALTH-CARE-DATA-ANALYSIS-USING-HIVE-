@@ -1,0 +1,48 @@
+DROP TABLE IF EXISTS TB;
+
+--create the hvac table on comma-separated sensor data
+CREATE EXTERNAL TABLE TB(
+	Countryname STRING,
+	ISO2country STRING,
+	ISO3 STRING,
+	ISOcode BIGINT,
+	Region STRING,
+	Year BIGINT,
+	Estimatedtotpop BIGINT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE LOCATION 'wasb://prakashredd@prakash1cgtyfrv.blob.core.windows.net/hivefolder/';
+
+
+
+DROP TABLE IF EXISTS TBnext;
+
+--create the hvac_temperatures table by selecting from the hvac table
+CREATE TABLE TBnext AS
+SELECT Countryname, ISO3 , Region FROM TB;
+
+
+SELECT Countryname, ISO3 , Region FROM TB;
+
+SELECT ISO2country FROM TB;
+
+
+DROP TABLE IF EXISTS TB;
+
+--create the hvac table on comma-separated sensor data
+CREATE EXTERNAL TABLE TBbig(
+	Countryname STRING,
+	ISO2country STRING,
+	ISO3 STRING,
+	ISOcode BIGINT,
+	Region STRING,
+	Year BIGINT,
+	Estimatedtotpop BIGINT,
+	TBwithHIV BIGINT,
+	EstimatedHIV BIGINT,
+	Casedeteclobound BIGINT,
+	Casepercent BIGINT,
+	Methodestimates BIGINT,
+	Estimatedmortality BIGINT,
+	Estmortb BIGINT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE LOCATION 'wasb://prakashredd@prakash1cgtyfrv.blob.core.windows.net/hivefolder/';
